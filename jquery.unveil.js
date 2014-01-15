@@ -16,19 +16,16 @@
         defaults = {
           threshold: 0,
           throttle: 0
-        };
-
-    options = $.extend(defaults, options);
-
-    var $w = $(window),
+        },
         retina = window.devicePixelRatio > 1,
         attrib = retina ? "data-src-retina" : "data-src",
         images = this,
         loaded,
         timer,
-        wh, 
-        eh;
+        wh;
 
+    options = $.extend(defaults, options);
+    
     this.one("unveil", function() {
       var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
@@ -48,9 +45,7 @@
         var $e = $(this);
         if ($e.is(":hidden")) return;
 
-        if (!wh) {
-          wh = $w.height();
-        }
+        if (!wh) wh = $w.height();
 
         var wt = $w.scrollTop(),
             wb = wt + wh,
