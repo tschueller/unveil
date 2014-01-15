@@ -73,7 +73,7 @@
     $w.scroll(unveil);
     $w.resize(unveil);
 
-    unveil();
+    filterImages();
 
     return this;
 
