@@ -15,15 +15,18 @@
     var $w = $(window),
         defaults = {
           threshold: 0,
-          throttle: 0
+          throttle: 0,
+          container: $w
         },
         retina = window.devicePixelRatio > 1,
         attrib = retina ? "data-src-retina" : "data-src",
         images = this,
         loaded,
         timer,
-        wh;
+        vh,
+        oc = options.container;
 
+    if (oc && (!oc.size || !oc.size())) throw "Invalid container";
     options = $.extend(defaults, options);
     
     this.one("unveil", function() {
@@ -45,14 +48,14 @@
         var $e = $(this);
         if ($e.is(":hidden")) return;
 
-        if (!wh) wh = $w.height();
+        if (!vh) vh = options.container.height();
 
-        var wt = $w.scrollTop(),
-            wb = wt + wh,
-            et = $e.offset().top,
-            eb = et + $e.height();
+        var vt = oc ? 0 : options.container.scrollTop(),
+        	vb = vt + vh,
+        	et = $e.offset().top - (oc ? options.container.offset().top : 0),
+        	eb = et + $e.height();
 
-        return eb >= wt - options.threshold && et <= wb + options.threshold;
+        return eb >= vt - options.threshold && et <= vb + options.threshold;
       });
 
       loaded = inview.trigger("unveil");
@@ -70,8 +73,8 @@
       }
     }
 
-    $w.scroll(unveil);
-    $w.resize(unveil);
+    if (!oc) $w.resize(unveil);
+    options.container.scroll(unveil);
 
     filterImages();
 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Filtrify">
+        <meta name="keywords" content="javascript, jquery, lazy load, performance, plugin" />
+        <meta name="author" content="Luís Almeida">
+        <meta name="viewport" content="width=device-width">
+        <title>jQuery Unveil - A very lightweight plugin to lazy load images</title>
+    </head>
+
+    <style>
+
+    body {
+        background: #FFF;
+        color: #555;
+        font-family: "Helvetica Neue", sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        padding: 10px;
+        margin: 0 auto;
+        max-width: 280px;
+    }
+    header {
+        margin: 10px 0;
+    }
+    header h1 {
+        color: #000;
+        font-size: 18px;
+        line-height: 1;
+        margin: 0 0 10px 0;
+    }
+    header h1 small{
+        font-size: 14px;
+    }
+    h2 {
+        color: #000;
+        font-size: 16px;
+        line-height: 1;
+        padding: 5px 0 0px 0;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    ul.srcollBox,
+    ul.srcollBox2
+    {
+        border: 1px solid #ccc;
+        height: 250px;
+        overflow: scroll;
+        overflow-x: hidden;
+        position: relative; 
+    }
+    ul > li {
+        margin-top: 10px;
+        text-align: center;
+        border: 1px solid #eee;
+        border-left: none;
+        border-right: none;
+    }
+    ul > li > img {
+        display: inline-block;
+        max-width: 100%;
+        min-height: 165px;
+        opacity: 0;
+        transition: opacity .2s ease-in;        
+    }
+    ul > li.loading {
+        background: transparent url(img/loader.gif) 50% 50% no-repeat;
+    }
+    
+    </style>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="jquery.unveil.min.js"></script>
+
+    <script>
+    $(function() {
+    	
+    	function handleLoad()
+    	{
+            $(this).load(function() 
+            {
+                $(this).parent().removeClass("loading");
+                this.style.opacity = 1;
+            })
+    	}
+    	
+        $("ul.srcollBox li img").unveil({
+            threshold: 200,
+            throttle: 80,
+            container: $("ul.srcollBox")
+        }, handleLoad);
+        
+        $("ul.srcollBox2 li img").unveil({
+            threshold: 0,
+            throttle: 80,
+            container: $("ul.srcollBox2")
+        }, handleLoad);
+        
+        $("ul.srcollBox3 li img").unveil({
+            threshold: 0,
+            throttle: 80
+        }, handleLoad);
+        
+     });
+    </script>
+
+    <body>
+
+    <header>
+        <h1>Unveil<small>.js</small></h1>
+    </header>
+
+    <h2>container 1:</h2>
+    <ul class="srcollBox">
+        <li class="loading"><img alt="1"  src="img/space.png" data-src="img/anti-bullying-tom-froese-wallpaper-800x500.jpg" data-src-retina="img/anti-bullying-tom-froese-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="2"  src="img/space.png" data-src="img/brock-davis-wallpaper-800x500.jpg" data-src-retina="img/brock-davis-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="3"  src="img/space.png" data-src="img/dark-igloo-wallpaper-800x500.jpg" data-src-retina="img/dark-igloo-wallpaper-800x500.jpg" /></li>
+        <li class="loading"><img alt="5"  src="img/space.png" data-src="img/iceland-smojr-wallpaper-800x500.jpg" data-src-retina="img/iceland-smjor-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="6"  src="img/space.png" data-src="img/james-olstein-wallpaper-800x500.jpg" data-src-retina="img/james-olstein-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="7"  src="img/space.png" data-src="img/johanna-basford-wallpaper-800x500.jpg" data-src-retina="img/johanna-basford-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="8"  src="img/space.png" data-src="img/Jude_Landry_Wallpaper_800x500.jpg" data-src-retina="img/Jude_Landry_Wallpaper_1280x800.jpg" /></li>
+        <li class="loading"><img alt="9"  src="img/space.png" data-src="img/julieta-felix-wallpaper-800x500.jpg" data-src-retina="img/julieta-felix-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="10" src="img/space.png" data-src="img/Timothy-J-Reynolds-wallpaper-800x500.jpg" data-src-retina="img/Timothy-J-Reynolds-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="11" src="img/space.png" data-src="img/haik-avanian-wallpaper-800x500.jpg" data-src-retina="img/haik-avanian-wallpaper-1280x800.jpg" /></li>
+    </ul>
+    <h2>container 2:</h2>
+    <ul class="srcollBox2">
+        <li class="loading"><img alt="1"  src="img/space.png" data-src="img/anti-bullying-tom-froese-wallpaper-800x500.jpg" data-src-retina="img/anti-bullying-tom-froese-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="2"  src="img/space.png" data-src="img/brock-davis-wallpaper-800x500.jpg" data-src-retina="img/brock-davis-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="3"  src="img/space.png" data-src="img/dark-igloo-wallpaper-800x500.jpg" data-src-retina="img/dark-igloo-wallpaper-800x500.jpg" /></li>
+        <li class="loading"><img alt="5"  src="img/space.png" data-src="img/iceland-smojr-wallpaper-800x500.jpg" data-src-retina="img/iceland-smjor-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="6"  src="img/space.png" data-src="img/james-olstein-wallpaper-800x500.jpg" data-src-retina="img/james-olstein-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="7"  src="img/space.png" data-src="img/johanna-basford-wallpaper-800x500.jpg" data-src-retina="img/johanna-basford-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="8"  src="img/space.png" data-src="img/Jude_Landry_Wallpaper_800x500.jpg" data-src-retina="img/Jude_Landry_Wallpaper_1280x800.jpg" /></li>
+        <li class="loading"><img alt="9"  src="img/space.png" data-src="img/julieta-felix-wallpaper-800x500.jpg" data-src-retina="img/julieta-felix-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="10" src="img/space.png" data-src="img/Timothy-J-Reynolds-wallpaper-800x500.jpg" data-src-retina="img/Timothy-J-Reynolds-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="11" src="img/space.png" data-src="img/haik-avanian-wallpaper-800x500.jpg" data-src-retina="img/haik-avanian-wallpaper-1280x800.jpg" /></li>
+    </ul>
+    <h2>without container:</h2>
+    <ul class="srcollBox3">
+        <li class="loading"><img alt="1"  src="img/space.png" data-src="img/anti-bullying-tom-froese-wallpaper-800x500.jpg" data-src-retina="img/anti-bullying-tom-froese-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="2"  src="img/space.png" data-src="img/brock-davis-wallpaper-800x500.jpg" data-src-retina="img/brock-davis-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="3"  src="img/space.png" data-src="img/dark-igloo-wallpaper-800x500.jpg" data-src-retina="img/dark-igloo-wallpaper-800x500.jpg" /></li>
+        <li class="loading"><img alt="5"  src="img/space.png" data-src="img/iceland-smojr-wallpaper-800x500.jpg" data-src-retina="img/iceland-smjor-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="6"  src="img/space.png" data-src="img/james-olstein-wallpaper-800x500.jpg" data-src-retina="img/james-olstein-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="7"  src="img/space.png" data-src="img/johanna-basford-wallpaper-800x500.jpg" data-src-retina="img/johanna-basford-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="8"  src="img/space.png" data-src="img/Jude_Landry_Wallpaper_800x500.jpg" data-src-retina="img/Jude_Landry_Wallpaper_1280x800.jpg" /></li>
+        <li class="loading"><img alt="9"  src="img/space.png" data-src="img/julieta-felix-wallpaper-800x500.jpg" data-src-retina="img/julieta-felix-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="10" src="img/space.png" data-src="img/Timothy-J-Reynolds-wallpaper-800x500.jpg" data-src-retina="img/Timothy-J-Reynolds-wallpaper-1280x800.jpg" /></li>
+        <li class="loading"><img alt="11" src="img/space.png" data-src="img/haik-avanian-wallpaper-800x500.jpg" data-src-retina="img/haik-avanian-wallpaper-1280x800.jpg" /></li>
+    </ul>
+
+    </body>
+</html>
